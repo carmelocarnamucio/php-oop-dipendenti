@@ -27,7 +27,7 @@
         }
 
         public function setName($name) {
-          if (getType($name) == 'string') {
+          if (getType($name) == "string") {
 					  $this -> name = $name;
 				  }
         }
@@ -37,7 +37,7 @@
         }
 
         public function setLastname($lastname) {
-          if (getType($lastname) == 'string') {
+          if (getType($lastname) == "string") {
 					  $this -> lastname = $lastname;
 				  }
         }
@@ -52,9 +52,9 @@
 
         public function __toString() {
           return
-              'Nome: ' . $this -> getName() . '<br>'
-              . 'Cognome: ' . $this -> getLastname() . '<br>'
-              . 'Data di nascita: ' . $this -> getDateOfBirth();
+              "Nome: " . $this -> getName() . "<br>"
+              . "Cognome: " . $this -> getLastname() . "<br>"
+              . "Data di nascita: " . $this -> getDateOfBirth();
         }
       }
 
@@ -84,14 +84,14 @@
         }
 
         public function setSalary($salary) {
-          if (getType($salary) == 'integer') {
+          if (getType($salary) == "integer") {
 					  $this -> salary = $salary;
 				  }
         }
 
         public function __toString(){
-          return parent::__toString() . '<br>'
-          . "Qualifica : " . $this -> getJobTitle() . '<br>'
+          return parent::__toString() . "<br>"
+          . "Qualifica : " . $this -> getJobTitle() . "<br>"
           . "Stpendio(€) : " . $this -> getSalary();
         }
 
@@ -117,8 +117,8 @@
         }
 
         public function __toString(){
-          return parent::__toString() . '<br>'
-          . "Responsabile area : " . $this -> getResponsibility() . '<br>';
+          return parent::__toString() . "<br>"
+          . "Responsabile area : " . $this -> getResponsibility() . "<br>";
         }
 
       }
@@ -146,7 +146,7 @@
       <div class="container">
         <?php
 
-        $boss = new Boss ("Guido", "Geller", "03/11/1959", "Dirigente", 3500, 'Risorse umane');
+        $boss = new Boss ("Guido", "Geller", "03/11/1959", "Dirigente", 3500, "Risorse umane");
 
         echo $boss;
 
