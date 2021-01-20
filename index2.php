@@ -30,7 +30,7 @@
 
         public function setName($name) {
           if (!(gettype($name) === "string" && strlen($name) > 3)) {
-            throw new Exception ('il nome deve contenere almeno 3 caratteri');
+            throw new ShortName ('il nome deve contenere almeno 3 caratteri');
           }
           $this-> name = $name;
         }
@@ -41,7 +41,7 @@
 
         public function setLastname($lastname) {
           if (!(gettype($lastname) === "string" && strlen($lastname) > 3)) {
-            throw new Exception ('il cognome deve contenere almeno tre caratteri');
+            throw new ShortLastname ('il cognome deve contenere almeno tre caratteri');
           }
           $this-> lastname = $lastname;
         }
@@ -60,7 +60,7 @@
 
         public function setSecuryLvl($securyLvl) {
 				  if ($securyLvl != 0) {
-            throw new Exception ('il livello di sicurezza deve essere zero');
+            throw new WrongSecuryLvl ('il livello di sicurezza deve essere zero');
 				}
 				  $this -> securyLvl = $securyLvl;
 			  }
@@ -103,11 +103,11 @@
 
           if (get_class($this) === "Employee") {
             if ($salary < 10000) {
-              throw new Exception ('valore non corretto');
+              throw new SalNotValid ('valore non corretto');
             }
           } elseif (get_class($this) === "Boss") {
             if ($salary < 100000) {
-              throw new Exception ('valore non corretto');
+              throw new SalNotValid ('valore non corretto');
             }
           }
           $this -> salary = $salary;
@@ -125,7 +125,7 @@
 
         public function setSecuryLvl($securyLvl) {
 				  if ($securyLvl < 1 || $securyLvl > 5) {
-					  throw new Exception ('il livello di sicurezza deve essere compreso da 1 a 5');
+					  throw new WrongSecuryLvl ('il livello di sicurezza deve essere compreso da 1 a 5');
 				  }
 				  $this -> securyLvl = $securyLvl;
 			  }
@@ -164,7 +164,7 @@
 
         public function setSecuryLvl($securyLvl) {
 				  if ($securyLvl < 6 || $securyLvl > 10) {
-					  throw new Exception ('il livello di sicurella deve essere da 6 a 10');
+					  throw new wrongSecuryLvl ('il livello di sicurella deve essere da 6 a 10');
 				  }
 				  $this -> securyLvl = $securyLvl;
 			  }
@@ -176,13 +176,19 @@
 			  public function setEmployees($employees) {
 
   				if ($employees == [] || !is_array($employees)) {
-  					throw new Exception ('il boss deve avere dei dipendenti');
+  					throw new BossEmployee ('il boss deve avere dei dipendenti');
   				}
 
 				  $this -> employees = $employees;
 			  }
 
       }
+
+      class ShortName extends Exception {}
+  		class ShortLastname extends Exception {}
+  		class SalNotValid extends Exception {}
+  		class BossEmployee extends Exception {}
+  		class WrongSecuryLvl extends Exception {}
 
       ?>
       <div class="container">
@@ -195,8 +201,12 @@
 
           echo $person;
 
-        } catch (Exception $e) {
-            echo $e;
+        } catch (ShortName $e) {
+            echo 'Errore: ' . $e -> getMessage() . '<br>';
+        } catch (ShortLastname $e) {
+            echo 'Errore: ' . $e -> getMessage() . '<br>';
+        } catch (wrongSecuryLvl $e) {
+            echo 'Error Boss: ' . $e -> getMessage() . '<br>';
         }
 
       ?>
@@ -211,8 +221,14 @@
 
           echo $staff;
 
-        } catch (Exception $e) {
-            echo $e;
+        } catch (ShortName $e) {
+            echo 'Errore: ' . $e -> getMessage() . '<br>';
+        } catch (ShortLastname $e) {
+            echo 'Errore: ' . $e -> getMessage() . '<br>';
+        } catch (SalNotValid $e) {
+            echo 'Errore: ' . $e -> getMessage() . '<br>';
+        } catch (wrongSecuryLvl $e) {
+            echo 'Error Boss: ' . $e -> getMessage() . '<br>';
         }
 
       ?>
@@ -227,8 +243,16 @@
 
           echo $boss;
 
-        } catch (Exception $e) {
-            echo $e;
+        } catch (ShortName $e) {
+            echo 'Errore: ' . $e -> getMessage() . '<br>';
+        } catch (ShortLastname $e) {
+            echo 'Errore: ' . $e -> getMessage() . '<br>';
+        } catch (SalNotValid $e) {
+            echo 'Errore: ' . $e -> getMessage() . '<br>';
+        } catch (wrongSecuryLvl $e) {
+            echo 'Error Boss: ' . $e -> getMessage() . '<br>';
+        } catch (BossEmployee $e) {
+            echo 'Error Boss: ' . $e -> getMessage() . '<br>';
         }
 
       ?>
